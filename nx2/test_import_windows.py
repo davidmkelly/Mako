@@ -135,7 +135,7 @@ int main(int argc,char **argv) {
     work=ROOT/'work';work.mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='import-windows-',dir=work) as temp:
         directory=Path(temp).resolve();directory.relative_to(work.resolve());cpp=directory/'fixture.cpp';exe=directory/'fixture.exe';cpp.write_text(fixture,encoding='utf-8')
-        subprocess.run([a.cxx,'-std=c++20','-O2','-D_CRT_SECURE_NO_WARNINGS','-I'+str(ROOT),str(cpp),'-o',str(exe)],check=True)
+        subprocess.run([a.cxx,'-std=c++20','-O2','-D_CRT_SECURE_NO_WARNINGS','-iquote'+str(ROOT),str(cpp),'-o',str(exe)],check=True)
         for chunk in ('16','3','0'):
             subprocess.run([str(exe)],env=dict(os.environ,RX_VK_IMPORT_CHUNK_MB=chunk,RX_VK_PREFETCH_CHUNKS='0'),check=True)
         for mode in ('1','0','2'):
