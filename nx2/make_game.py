@@ -761,7 +761,6 @@ def check_cache_paths(out, paths):
 
 def check(a, work):
     check_windows_sdk(work)   # (first: said in plain words when the game is chosen, not after it has been read)
-    check_cpu()
     if a.nup or a.nx:
         probe = os.path.join(work, "probe")
         shutil.rmtree(probe, ignore_errors=True)
